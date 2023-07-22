@@ -4,10 +4,10 @@ import 'package:meta/meta.dart';
 
 import '_index.dart';
 
-abstract class AppFlow<Shared extends AppFlowShared> {
-  AppFlow({
+abstract class Coordinator<Shared extends CoordinatorShared> {
+  Coordinator({
     required this.shared,
-    AppFlowNavigator? navigator,
+    CoordinatorNavigator? navigator,
   }) : _navigator = navigator {
     try {
       onCreate();
@@ -18,10 +18,10 @@ abstract class AppFlow<Shared extends AppFlowShared> {
 
   @protected
   final Shared shared;
-  final AppFlowNavigator? _navigator;
+  final CoordinatorNavigator? _navigator;
 
   @protected
-  AppFlowNavigator get navigator => _navigator ?? shared.navigator;
+  CoordinatorNavigator get navigator => _navigator ?? shared.navigator;
 
   void onCreate() {}
 

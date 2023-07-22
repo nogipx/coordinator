@@ -1,7 +1,7 @@
 name: coordinator
-version: 0.1.0
-repository: https://github.com/nogipx/app_flow
-issue_tracker: https://github.com/nogipx/app_flow/issues
+version: 0.1.1
+repository: https://github.com/nogipx/coordinator
+issue_tracker: https://github.com/nogipx/coordinator/issues
 description: Application Coordinator pattern for Flutter. 
   Architecture pattern for decoupling app behavior.
 

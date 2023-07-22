@@ -1,13 +1,13 @@
 import '_index.dart';
 
-abstract class AppFlowInput<Shared extends AppFlowShared> {
+abstract class CoordinatorInput<Shared extends CoordinatorShared> {
   Shared get shared;
 }
 
-class AppFlowRunner<T extends AppFlowInput> {
-  final FutureOr<AppFlow> Function(T input) _flowCreator;
+class CoordinatorRunner<T extends CoordinatorInput> {
+  final FutureOr<Coordinator> Function(T input) _flowCreator;
 
-  const AppFlowRunner(this._flowCreator);
+  const CoordinatorRunner(this._flowCreator);
 
   Future<void> run(T input) async {
     final flow = await _flowCreator(input);

@@ -2,22 +2,22 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-typedef AppFlowRouteBuilder = Route<Object> Function(
+typedef CoordinatorRouteBuilder = Route<Object> Function(
     WidgetBuilder widgetBuilder);
 
-enum AppFlowNavigatorType {
+enum CoordinatorNavigatorType {
   material,
   cupertino,
 }
 
-abstract class AppFlowNavigator {
-  factory AppFlowNavigator({
-    required AppFlowRouteBuilder routeBuilder,
+abstract class CoordinatorNavigator {
+  factory CoordinatorNavigator({
+    required CoordinatorRouteBuilder routeBuilder,
     required GlobalKey<NavigatorState> navigatorKey,
   }) =>
       _NavigatorImpl(routeBuilder, navigatorKey);
 
-  factory AppFlowNavigator.material({
+  factory CoordinatorNavigator.material({
     required GlobalKey<NavigatorState> navigatorKey,
   }) =>
       _NavigatorImpl(
@@ -25,7 +25,7 @@ abstract class AppFlowNavigator {
         navigatorKey,
       );
 
-  factory AppFlowNavigator.cupertino({
+  factory CoordinatorNavigator.cupertino({
     required GlobalKey<NavigatorState> navigatorKey,
   }) =>
       _NavigatorImpl(
@@ -42,7 +42,7 @@ abstract class AppFlowNavigator {
   void pop({bool toFirst = false});
 }
 
-class _NavigatorImpl implements AppFlowNavigator {
+class _NavigatorImpl implements CoordinatorNavigator {
   const _NavigatorImpl(
     this._routeBuilder,
     this.navigatorKey,
@@ -50,7 +50,7 @@ class _NavigatorImpl implements AppFlowNavigator {
 
   @override
   final GlobalKey<NavigatorState> navigatorKey;
-  final AppFlowRouteBuilder _routeBuilder;
+  final CoordinatorRouteBuilder _routeBuilder;
 
   NavigatorState? get _navigator => Navigator.maybeOf(
         navigatorKey.currentContext!,
@@ -59,7 +59,7 @@ class _NavigatorImpl implements AppFlowNavigator {
   @override
   Future<Object?> next(
     WidgetBuilder widgetBuilder, {
-    AppFlowRouteBuilder? routeBuilder,
+    CoordinatorRouteBuilder? routeBuilder,
   }) async {
     return _navigator?.push(
       _routeBuilder(widgetBuilder),
@@ -69,7 +69,7 @@ class _NavigatorImpl implements AppFlowNavigator {
   @override
   Future<Object?>? nextReplaceLast(
     WidgetBuilder widgetBuilder, {
-    AppFlowRouteBuilder? routeBuilder,
+    CoordinatorRouteBuilder? routeBuilder,
   }) {
     return _navigator?.pushReplacement(
       _routeBuilder(widgetBuilder),
@@ -79,7 +79,7 @@ class _NavigatorImpl implements AppFlowNavigator {
   @override
   Future<void> first(
     WidgetBuilder widgetBuilder, {
-    AppFlowRouteBuilder? routeBuilder,
+    CoordinatorRouteBuilder? routeBuilder,
   }) async =>
       await _navigator?.pushAndRemoveUntil(
         _routeBuilder(widgetBuilder),
@@ -89,7 +89,7 @@ class _NavigatorImpl implements AppFlowNavigator {
   @override
   Future<void> second(
     WidgetBuilder widgetBuilder, {
-    AppFlowRouteBuilder? routeBuilder,
+    CoordinatorRouteBuilder? routeBuilder,
   }) async =>
       await _navigator?.pushAndRemoveUntil(
         _routeBuilder(widgetBuilder),

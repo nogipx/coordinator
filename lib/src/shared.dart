@@ -1,5 +1,5 @@
 import '_index.dart';
 
-abstract class AppFlowShared {
-  AppFlowNavigator get navigator;
+abstract class CoordinatorShared {
+  CoordinatorNavigator get navigator;
 }
